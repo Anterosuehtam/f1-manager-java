@@ -6,13 +6,14 @@ import br.com.f1manager.model.PilotoDto;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     static void main(String[] args) {
@@ -42,12 +43,41 @@ public class Main {
                     .create();
 
             ApiResponseDto apiResponse = gson.fromJson(jsonBody, ApiResponseDto.class);
+            List<PilotoDto> listaDePilotosDto = apiResponse.mrData().driverTable().pilotos();
 
-            java.util.List<PilotoDto> listaDePilotosDto = apiResponse.mrData().driverTable().pilotos();
+            List<Piloto> grid = new ArrayList<>();
+            for (PilotoDto dto : listaDePilotosDto) {
 
-            System.out.println("\n--- Pilotos Carregados da API ---");
-            for (PilotoDto pilotoDto : listaDePilotosDto) {
-                System.out.println(pilotoDto.nome() + " " + pilotoDto.sobrenome() + " (" + pilotoDto.sigla() + ")");
+                // Proteção para caso a data de nascimento for nula
+                LocalDate dataNascimentoConvertida = null;
+                if (dto.dataNascimento() != null) {
+                    dataNascimentoConvertida = LocalDate.parse(dto.dataNascimento());
+                }
+
+                // Proteção do Número (Se for null, recebe o valor padrão 0)
+                int numeroConvertido = 0;
+                if (dto.numero() != null) {
+                    numeroConvertido = Integer.parseInt(dto.numero());
+                }
+
+                // Instanciando o objeto ca classe Piloto
+                Piloto piloto = new Piloto(
+                        dto.id(),
+                        dto.nome(),
+                        dto.sobrenome(),
+                        numeroConvertido,
+                        dto.sigla(),
+                        dto.nacionalidade(),
+                        dataNascimentoConvertida,
+                        "Desconhecida"
+                );
+                grid.add(piloto);
+            }
+
+            System.out.println("\n--- Grid Oficial Convertido para Piloto ---");
+            for (Piloto piloto : grid) {
+                // Metodo toString() da classe Piloto invocado automaticamente
+                System.out.println(piloto);
             }
 
         } catch (IOException | InterruptedException e) {
