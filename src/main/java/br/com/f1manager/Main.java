@@ -14,6 +14,7 @@ import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     static void main(String[] args) {
@@ -73,10 +74,20 @@ public class Main {
                 );
                 grid.add(piloto);
             }
-
-            System.out.println("\n--- Grid Oficial Convertido para Piloto ---");
+            System.out.println("\n--- Grid Completo Convertido para Piloto ---");
             for (Piloto piloto : grid) {
                 // Metodo toString() da classe Piloto invocado automaticamente
+                System.out.println(piloto);
+            }
+
+            //Aplicando um filtro: O piloto DEVE ter número diferente de 0 E sigla diferente de nulo
+            List<Piloto> pilotosTitulares = grid.stream()
+                                .filter(piloto -> piloto.getNumero() != 0 && piloto.getSigla() != null)
+                                .collect(Collectors.toList());
+
+            // Mostra apenas os pilotos titulares
+            System.out.println("\n--- Grid Oficial de Titulares ---");
+            for (Piloto piloto : pilotosTitulares) {
                 System.out.println(piloto);
             }
 
@@ -84,6 +95,5 @@ public class Main {
             System.out.println("Opa! Ocorreu um erro ao tentar acessar a API da F1.");
             System.out.println("Detalhe do erro: " + e.getMessage());
         }
-
     }
 }
