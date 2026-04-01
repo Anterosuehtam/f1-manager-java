@@ -1,0 +1,14 @@
+package br.com.f1manager.model;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.time.LocalDate;
+
+public record PilotoDto(@SerializedName("driverId") String id,
+                        @SerializedName("givenName") String nome,
+                        @SerializedName("familyName")String sobrenome,
+                        @SerializedName("permanentNumber") String numero,
+                        @SerializedName("code") String sigla,
+                        @SerializedName("nationality") String nacionalidade,
+                        @SerializedName("dateOfBirth") String dataNascimento) {
+}
