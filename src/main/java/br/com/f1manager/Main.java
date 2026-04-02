@@ -6,11 +6,16 @@ import br.com.f1manager.model.PilotoDto;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +44,11 @@ public class Main {
 
             // Criando o gson
             Gson gson = new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
                     .setPrettyPrinting()
+                    // Metodo responsável por chamar o toString() do LocalDate e salvar o texto no JSON. Obs: O java bloqueia bibliotecas externas
+                    // de analisar o código interno, é preciso ensinar ao Gson o que fazer quando encontrar um LocalDate.
+                    .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
+                            new JsonPrimitive(src.toString()))
                     .create();
 
             ApiResponseDto apiResponse = gson.fromJson(jsonBody, ApiResponseDto.class);
@@ -89,6 +97,18 @@ public class Main {
             System.out.println("\n--- Grid Oficial de Titulares ---");
             for (Piloto piloto : pilotosTitulares) {
                 System.out.println(piloto);
+            }
+
+            String json = gson.toJson(pilotosTitulares);
+
+            try {
+                Path caminhoDoArquivo = Path.of("grid-titulares-2026.json");
+                Files.writeString(caminhoDoArquivo, json);
+
+                System.out.println("Sucesso! Arquivo salvo em: " + caminhoDoArquivo.toAbsolutePath());
+
+            }catch (IOException e) {
+                System.out.println("Falha ao tentar salvar aquivo!" + e.getMessage());
             }
 
         } catch (IOException | InterruptedException e) {
