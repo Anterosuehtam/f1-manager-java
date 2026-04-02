@@ -47,28 +47,28 @@ public class Main {
             List<PilotoDto> listaDePilotosDto = apiResponse.mrData().driverTable().pilotos();
 
             List<Piloto> grid = new ArrayList<>();
-            for (PilotoDto dto : listaDePilotosDto) {
+            for (PilotoDto pilotoDto : listaDePilotosDto) {
 
                 // Proteção para caso a data de nascimento for nula
                 LocalDate dataNascimentoConvertida = null;
-                if (dto.dataNascimento() != null) {
-                    dataNascimentoConvertida = LocalDate.parse(dto.dataNascimento());
+                if (pilotoDto.dataNascimento() != null) {
+                    dataNascimentoConvertida = LocalDate.parse(pilotoDto.dataNascimento());
                 }
 
                 // Proteção do Número (Se for null, recebe o valor padrão 0)
                 int numeroConvertido = 0;
-                if (dto.numero() != null) {
-                    numeroConvertido = Integer.parseInt(dto.numero());
+                if (pilotoDto.numero() != null) {
+                    numeroConvertido = Integer.parseInt(pilotoDto.numero());
                 }
 
-                // Instanciando o objeto ca classe Piloto
+                // Instanciando o objeto da classe Piloto
                 Piloto piloto = new Piloto(
-                        dto.id(),
-                        dto.nome(),
-                        dto.sobrenome(),
+                        pilotoDto.id(),
+                        pilotoDto.nome(),
+                        pilotoDto.sobrenome(),
                         numeroConvertido,
-                        dto.sigla(),
-                        dto.nacionalidade(),
+                        pilotoDto.sigla(),
+                        pilotoDto.nacionalidade(),
                         dataNascimentoConvertida,
                         "Desconhecida"
                 );
