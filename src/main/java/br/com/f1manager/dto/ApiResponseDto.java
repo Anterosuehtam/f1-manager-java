@@ -1,4 +1,4 @@
-package br.com.f1manager.model;
+package br.com.f1manager.dto;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,6 +1,5 @@
 package br.com.f1manager.repository;
 
-import br.com.f1manager.model.Piloto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonPrimitive;
@@ -23,8 +22,8 @@ public class ArquivoRepository {
                 .create();
     }
 
-    public void salvarPilotos(List<Piloto> pilotos, String nomeArquivo) {
-        String jsonParaSalvar = gson.toJson(pilotos);
+    public void salvar(List<?> lista, String nomeArquivo) {
+        String jsonParaSalvar = gson.toJson(lista);
 
         try {
             Path caminhoDoArquivo = Path.of(nomeArquivo);
