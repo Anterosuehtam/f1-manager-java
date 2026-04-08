@@ -8,11 +8,11 @@ import java.net.http.HttpResponse;
 
 public class F1ApiClient {
 
-    public String buscarJsonPilotos(String ano) {
+    public String buscarDados(String endpoint) {
         try {
             HttpClient client = HttpClient.newHttpClient();
 
-            String url = "https://api.jolpi.ca/ergast/f1/2026/drivers.json";
+            String url = "https://api.jolpi.ca/ergast/f1/" + endpoint + ".json";
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))

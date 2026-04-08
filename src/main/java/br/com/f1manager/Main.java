@@ -12,7 +12,7 @@ public class Main {
         System.out.println("Conectando aos servidores da F1...\n");
 
         F1ApiClient clienteApi = new F1ApiClient();
-        String jsonBody = clienteApi.buscarJsonPilotos("2026");
+        String jsonBody = clienteApi.buscarDados("2026/drivers");
 
         PilotoService pilotoService = new PilotoService();
         List<Piloto> pilotosTitulares = pilotoService.processarPilotosDaApi(jsonBody);
