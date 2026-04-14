@@ -34,16 +34,16 @@ A base do código foi desenhada de forma totalmente desacoplada para facilitar a
 git clone [https://github.com/seu-usuario/f1-manager.git](https://github.com/seu-usuario/f1-manager.git)
 ```
 
-**2. Abra o projeto:
+**2. Abra o projeto:**
 Abra o diretório na sua IDE de preferência (IntelliJ, Eclipse, etc).
 
-**3. Configure as dependências:
+**3. Configure as dependências:**
 Certifique-se de que a biblioteca Gson está devidamente baixada pelo Maven (pom.xml).
 
-**4. Execute a aplicação:
+**4. Execute a aplicação:**
 Rode a classe Main.java.
 
-**5. Verifique o resultado:
+**5. Verifique o resultado:**
 Observe o console e a raiz do projeto para visualizar os arquivos .json gerados automaticamente com os dados atualizados do grid e das equipes!
 
 Desenvolvido por [Matheus Antero](https://www.linkedin.com/in/matheus-antero-/) - Consolidando conhecimentos práticos em Back-end.
