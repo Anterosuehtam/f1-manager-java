@@ -31,7 +31,7 @@ A base do código foi desenhada de forma totalmente desacoplada para facilitar a
 
 **1. Clone este repositório:**
 ```bash
-git clone [https://github.com/seu-usuario/f1-manager.git](https://github.com/seu-usuario/f1-manager.git)
+git clone [https://github.com/anterosuehtam/f1-manager.git](https://github.com/anterosuehtam/f1-manager.git)
 ```
 
 **2. Abra o projeto:**
