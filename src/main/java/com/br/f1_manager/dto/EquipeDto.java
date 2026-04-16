@@ -1,4 +1,4 @@
-package br.com.f1manager.dto;
+package com.br.f1_manager.dto;
 
 import com.google.gson.annotations.SerializedName;
 

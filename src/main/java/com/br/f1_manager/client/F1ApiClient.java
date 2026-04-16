@@ -1,4 +1,4 @@
-package br.com.f1manager.client;
+package com.br.f1_manager.client;
 
 import java.io.IOException;
 import java.net.URI;

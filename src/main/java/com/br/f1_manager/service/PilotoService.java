@@ -1,8 +1,8 @@
-package br.com.f1manager.service;
+package com.br.f1_manager.service;
 
-import br.com.f1manager.dto.ApiResponseDto;
-import br.com.f1manager.model.Piloto;
-import br.com.f1manager.dto.PilotoDto;
+import com.br.f1_manager.dto.ApiResponseDto;
+import com.br.f1_manager.dto.PilotoDto;
+import com.br.f1_manager.model.Piloto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

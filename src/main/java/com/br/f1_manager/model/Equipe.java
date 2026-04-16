@@ -1,4 +1,4 @@
-package br.com.f1manager.model;
+package com.br.f1_manager.model;
 
 public class Equipe {
 
