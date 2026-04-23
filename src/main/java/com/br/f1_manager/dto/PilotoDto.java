@@ -1,12 +1,12 @@
 package com.br.f1_manager.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record PilotoDto(@SerializedName("driverId") String id,
-                        @SerializedName("givenName") String nome,
-                        @SerializedName("familyName")String sobrenome,
-                        @SerializedName("permanentNumber") String numero,
-                        @SerializedName("code") String sigla,
-                        @SerializedName("nationality") String nacionalidade,
-                        @SerializedName("dateOfBirth") String dataNascimento) {
+public record PilotoDto(@JsonProperty("driverId") String id,
+                        @JsonProperty("givenName") String nome,
+                        @JsonProperty("familyName")String sobrenome,
+                        @JsonProperty("permanentNumber") String numero,
+                        @JsonProperty("code") String sigla,
+                        @JsonProperty("nationality") String nacionalidade,
+                        @JsonProperty("dateOfBirth") String dataNascimento) {
 }

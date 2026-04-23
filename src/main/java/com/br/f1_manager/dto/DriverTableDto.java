@@ -1,7 +1,7 @@
 package com.br.f1_manager.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-public record DriverTableDto(@SerializedName("Drivers") List<PilotoDto> pilotos) {
+public record DriverTableDto(@JsonProperty("Drivers") List<PilotoDto> pilotos) {
 }

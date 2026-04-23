@@ -1,31 +1,19 @@
 package com.br.f1_manager.client;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+@Component
 public class F1ApiClient {
 
-    public String buscarDados(String endpoint) {
-        try {
-            HttpClient client = HttpClient.newHttpClient();
+    private final RestTemplate restTemplate = new RestTemplate();
 
-            String url = "https://api.jolpi.ca/ergast/f1/" + endpoint + ".json";
+    private final String urlBase = "https://api.jolpi.ca/ergast/f1/";
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .build();
+    public <T> T obterDados(String endpoint, Class<T> classe) {
 
-            // Criando um objeto da classe Response que utiliza o metodo send da classe Client
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String urlCompleta = urlBase + endpoint;
 
-            return response.body();
-
-        } catch (IOException | InterruptedException e) {
-
-            throw new RuntimeException("Falha ao se comunicar com a API da Jolpica-F1: " + e.getMessage());
-        }
+        return restTemplate.getForObject(urlCompleta, classe);
     }
 }

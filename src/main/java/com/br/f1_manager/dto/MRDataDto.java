@@ -1,7 +1,7 @@
 package com.br.f1_manager.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record MRDataDto(@SerializedName("DriverTable") DriverTableDto driverTable,
-                        @SerializedName("ConstructorTable") ConstructorTableDto constructorTable) {
+public record MRDataDto(@JsonProperty("DriverTable") DriverTableDto driverTable,
+                        @JsonProperty("ConstructorTable") ConstructorTableDto constructorTable) {
 }

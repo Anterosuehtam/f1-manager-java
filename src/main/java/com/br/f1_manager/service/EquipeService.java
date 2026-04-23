@@ -1,37 +1,40 @@
 package com.br.f1_manager.service;
+
+import com.br.f1_manager.client.F1ApiClient;
 import com.br.f1_manager.dto.ApiResponseDto;
 import com.br.f1_manager.dto.EquipeDto;
 import com.br.f1_manager.model.Equipe;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.br.f1_manager.repository.EquipeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class EquipeService {
-    private final Gson gson;
 
-    public EquipeService() {
-        this.gson = new GsonBuilder()
-                .create();
-    }
+    private final F1ApiClient apiClient;
+    private final EquipeRepository repository;
 
-    public List<Equipe> processarEquipesDaApi(String jsonBody) {
+    public void carregarEquipesTemporada(int ano){
 
-        ApiResponseDto apiResponse = gson.fromJson(jsonBody, ApiResponseDto.class);
-        List<EquipeDto> listaDeEquipesDto = apiResponse.mrData().constructorTable().equipes();
+        String endpoint = ano + "/constructors.json";
+        ApiResponseDto resposta = apiClient.obterDados(endpoint, ApiResponseDto.class);
 
-        List<Equipe> equipes = new ArrayList<>();
+        List<EquipeDto> equipesDto = resposta.mrData().constructorTable().equipes();
 
-        for (EquipeDto equipeDto : listaDeEquipesDto) {
-            // Instanciando o objeto da classe Equipe
-            Equipe equipe = new Equipe(
-                    equipeDto.id(),
-                    equipeDto.nome(),
-                    equipeDto.nacionalidade()
-            );
-            equipes.add(equipe);
+        System.out.println("Encontradas " + equipesDto.size() + " equipes. Salvando no banco...");
+
+        for (EquipeDto dto : equipesDto) {
+
+            Equipe equipeOficial = new Equipe();
+
+            equipeOficial.setId(dto.id());
+            equipeOficial.setNome(dto.nome());
+            equipeOficial.setNacionalidade(dto.nacionalidade());
+
+            repository.save(equipeOficial);
         }
-        return equipes;
     }
 }

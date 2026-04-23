@@ -1,6 +1,6 @@
 package com.br.f1_manager.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record ApiResponseDto(@SerializedName("MRData") MRDataDto mrData) {
+public record ApiResponseDto(@JsonProperty("MRData") MRDataDto mrData) {
 }

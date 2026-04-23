@@ -1,8 +1,7 @@
 package com.br.f1_manager.dto;
 
-import com.google.gson.annotations.SerializedName;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-public record ConstructorTableDto(@SerializedName("Constructors")List<EquipeDto> equipes) {
+public record ConstructorTableDto(@JsonProperty("Constructors")List<EquipeDto> equipes) {
 }

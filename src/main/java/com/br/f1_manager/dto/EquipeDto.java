@@ -1,8 +1,8 @@
 package com.br.f1_manager.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record EquipeDto(@SerializedName ("constructorId") String id,
-                        @SerializedName ("name") String nome,
-                        @SerializedName ("nationality") String nacionalidade) {
+public record EquipeDto(@JsonProperty("constructorId") String id,
+                        @JsonProperty ("name") String nome,
+                        @JsonProperty ("nationality") String nacionalidade) {
 }
