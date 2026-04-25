@@ -17,7 +17,7 @@ public class EquipeService {
     private final F1ApiClient apiClient;
     private final EquipeRepository repository;
 
-    public void carregarEquipesTemporada(int ano){
+    public void carregarEquipesDaTemporada(int ano){
 
         String endpoint = ano + "/constructors.json";
         ApiResponseDto resposta = apiClient.obterDados(endpoint, ApiResponseDto.class);
