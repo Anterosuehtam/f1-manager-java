@@ -50,7 +50,6 @@ public class PilotoService {
                 pilotoOficial.setSigla(dto.sigla());
                 pilotoOficial.setNacionalidade(dto.nacionalidade());
                 pilotoOficial.setDataNascimento(dataNascimentoConvertida);
-                pilotoOficial.setEquipeAtual("Desconhecida");
 
                 repository.save(pilotoOficial);
             }
