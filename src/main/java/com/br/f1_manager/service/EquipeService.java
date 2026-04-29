@@ -3,12 +3,14 @@ package com.br.f1_manager.service;
 import com.br.f1_manager.client.F1ApiClient;
 import com.br.f1_manager.dto.ApiResponseDto;
 import com.br.f1_manager.dto.EquipeDto;
+import com.br.f1_manager.dto.EquipeResponseDto;
 import com.br.f1_manager.model.Equipe;
 import com.br.f1_manager.repository.EquipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +38,18 @@ public class EquipeService {
 
             repository.save(equipeOficial);
         }
+    }
+
+    public List<EquipeResponseDto> listarTodasEquipes() {
+
+        List<Equipe> equipesNoBanco = repository.findAll();
+
+        return equipesNoBanco.stream()
+                .map(equipe -> new EquipeResponseDto(
+                        equipe.getId(),
+                        equipe.getNome(),
+                        equipe.getNacionalidade()
+                ))
+                .collect(Collectors.toList());
     }
 }
